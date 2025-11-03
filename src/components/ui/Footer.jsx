@@ -1,4 +1,3 @@
-// Footer.jsx
 export default function Footer() {
   return (
     <footer className=" mt-12 border-t border-gray-300">
@@ -8,7 +7,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-gray-800 mb-2">CloseShop</h3>
             <p className="text-sm text-gray-600">
-              Tu espacio ideal para disfrutar de nuestros servicios.
+              Su espacio ideal para disfrutar de nuestros servicios.
             </p>
           </div>
 
@@ -22,13 +21,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/about" className="text-gray-600 hover:underline">
-                  Sobre nosotros
-                </a>
-              </li>
-              <li>
                 <a href="/services" className="text-gray-600 hover:underline">
-                  Servicios
+                  Productos
                 </a>
               </li>
               <li>
@@ -36,21 +30,26 @@ export default function Footer() {
                   Contacto
                 </a>
               </li>
+              <li>
+                <a href="/about" className="text-gray-600 hover:underline">
+                  Sobre nosotros
+                </a>
+              </li>
             </ul>
           </div>
 
           {/* Columna 3 */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">Contáctanos</h3>
-            <p className="text-sm text-gray-600">📍 Dirección: Calle 42 #81-50, Villavicencio, Meta</p>
-            <p className="text-sm text-gray-600">📞 Teléfono: +57 312 345 6789</p>
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">Contáctenos</h3>
+            <p className="text-sm text-gray-600">📍 Dirección: Calle 42 #81-50, Villavicencio, Meta.</p>
+            <p className="text-sm text-gray-600">📞 Teléfono: +57 312-345-6789</p>
             <p className="text-sm text-gray-600">📧 Email: closeshop@gmail.com</p>
           </div>
         </div>
 
         {/* Copyright */}
         <div className="mt-8 border-t border-gray-300 pt-4 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} CloseShop. Todos los derechos reservados.
+          © 2025 CloseShop. Todos los derechos reservados.
         </div>
       </div>
     </footer>

@@ -94,7 +94,7 @@ export default function Register() {
               {/* Botón principal */}
               <button
                 type="submit"
-                className="w-full bg-pink-200 py-2 rounded-md hover:bg-pink-100 transition border border-pink-300 font-medium"
+                className="mt-5 w-full border border-amber-950 text-black py-2 rounded-md hover:bg-amber-950/30 transition"
               >
                 Registrarse
               </button>
@@ -116,7 +116,7 @@ export default function Register() {
             {/* Enlace a login */}
             <div className="mt-6 text-sm text-center">
               ¿Ya tienes una cuenta?{" "}
-              <a href="/login" className="font-bold hover:underline">
+              <a href="/login" className="font-bold hover:underline hover:text-amber-950">
                 Inicia sesión
               </a>
             </div>

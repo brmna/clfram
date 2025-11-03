@@ -4,7 +4,7 @@ export default function AboutPage() {
       <h1 className="text-3xl font-bold mb-6 text-center">Sobre nosotros</h1>
       <p className="text-gray-600 text-lg leading-relaxed mb-6 text-center">
         Somos una tienda de ropa moderna ubicada en Villavicencio, Colombia.
-        Ofrecemos prendas únicas, cómodas y de calidad para que siempre luzcas a la moda.
+        Ofrecemos prendas únicas, cómodas y de calidad para que siempre luzca a la moda.
         Nuestra pasión es llevar estilo y confianza a cada cliente.
       </p>
 

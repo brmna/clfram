@@ -35,10 +35,10 @@ export default function Header() {
 
           {/* Menú principal (escritorio) */}
           <div className="hidden sm:flex items-center gap-8 font-semibold">
-            <a href="/" className="hover:text-gray-900 transition">Home</a>
-            <a href="/services" className="hover:text-gray-900 transition">Productos</a>
-            <a href="/contact" className="hover:text-gray-900 transition">Contáctenos</a>
-            <a href="/about" className="hover:text-gray-900 transition">Nosotros</a>
+            <a href="/" className="hover:text-amber-950 transition">Home</a>
+            <a href="/services" className="hover:text-amber-950 transition">Productos</a>
+            <a href="/contact" className="hover:text-amber-950 transition">Contáctenos</a>
+            <a href="/about" className="hover:text-amber-950 transition">Nosotros</a>
           </div>
 
           {/* Sección derecha */}
@@ -71,7 +71,6 @@ export default function Header() {
             <button
               className="sm:hidden text-2xl p-2 rounded-md hover:bg-gray-200 transition"
               onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Abrir menú"
             >
               ☰
             </button>
@@ -82,11 +81,11 @@ export default function Header() {
 
         {/* Menú móvil */}
         {menuOpen && (
-          <div className="sm:hidden flex flex-col bg-white/90 backdrop-blur-md text-center py-4 space-y-2.5 font-semibold">
-            <a href="/" className="hover:text-gray-900 transition" onClick={() => setMenuOpen(false)}>Inicio</a>
-            <a href="/services" className="hover:text-gray-900 transition" onClick={() => setMenuOpen(false)}>Productos</a>
-            <a href="/contact" className="hover:text-gray-900 transition" onClick={() => setMenuOpen(false)}>Contáctenos</a>
-            <a href="/about" className="hover:text-gray-900 transition" onClick={() => setMenuOpen(false)}>Nosotros</a>
+          <div className="sm:hidden flex flex-col bg-white/5 shadow-sm text-center py-4 space-y-2.5 font-semibold">
+            <a href="/" className="hover:text-amber-950 transition" onClick={() => setMenuOpen(false)}>Inicio</a>
+            <a href="/services" className="hover:text-amber-950 transition" onClick={() => setMenuOpen(false)}>Productos</a>
+            <a href="/contact" className="hover:text-amber-950 transition" onClick={() => setMenuOpen(false)}>Contáctenos</a>
+            <a href="/about" className="hover:text-amber-950 transition" onClick={() => setMenuOpen(false)}>Nosotros</a>
             <hr className="border-gray-300 w-3/4 mx-auto" />
             <a href="/login" className="border border-black px-3 py-1 rounded-md font-semibold hover:bg-white/50 hover:text-black transition">Iniciar sesión</a>
 
@@ -97,7 +96,7 @@ export default function Header() {
 
       {/* carrito */}
       <button 
-        className="fixed bottom-7 right-7 p-7 rounded-full hover:bg-amber-950/80 hover:scale-105 transition bg-amber-950/70 backdrop-blur-md shadow-sm z-50">
+        className="text-2xl fixed bottom-7 right-7 p-5 rounded-full hover:bg-amber-950/80 hover:scale-105 transition bg-amber-950/70 backdrop-blur-md shadow-sm z-50">
         🛒
       </button> 
     </header>

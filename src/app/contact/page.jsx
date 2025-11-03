@@ -12,7 +12,7 @@ export default function ContactPage() {
           <h2 className="text-xl font-semibold mb-4">Envíenos un mensaje</h2>
           
             <label className="block text-sm font-medium mb-1">Nombre</label>
-            <input type="text" placeholder="Tu nombre" className="w-full border rounded-md px-3 py-2 focus:ring focus:ring-pink-200 transition outline-none"/>
+            <input type="text" placeholder="su nombre" className="w-full border rounded-md px-3 py-2 focus:ring focus:ring-pink-200 transition outline-none"/>
             <label className="block text-sm font-medium mb-1">Email</label>
             <input type="email" placeholder="ejemplo@gmail.com" className="w-full border rounded-md px-3 py-2 focus:ring focus:ring-pink-200 transition outline-none"/>
 
@@ -31,7 +31,7 @@ export default function ContactPage() {
 
           <button
             type="submit"
-            className="w-full bg-pink-200 py-2 rounded-md hover:bg-pink-100 transition border border-pink-300 font-medium"
+            className="mt-5 w-full border border-amber-950 text-black py-2 rounded-md hover:bg-amber-950/30 transition"
           >
             Enviar
           </button>
@@ -39,7 +39,7 @@ export default function ContactPage() {
 
         {/* Información de contacto */}
         <div className="text-gray-800 space-y-6 p-8">
-          <h2 className="text-xl font-semibold">Información de Contacto</h2>
+          <h2 className="text-xl font-semibold">Información de contacto</h2>
 
           <div>
             <p className="font-semibold py-2">Dirección</p>
@@ -48,7 +48,7 @@ export default function ContactPage() {
 
           <div>
             <p className="font-semibold py-2">Teléfono</p>
-            <p className="text-gray-600">+57 312 345 6789</p>
+            <p className="text-gray-600">+57 312-345-6789</p>
           </div>
 
           <div>

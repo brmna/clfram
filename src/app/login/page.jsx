@@ -40,7 +40,7 @@ export default function Login(){
                             </label>
                                 <input type="password" name="pass" placeholder="Contraseña" required className="w-full border rounded-md px-3 py-2 focus:ring focus:ring-pink-200 transition outline-none"/>
                             
-                            <button type="submit" className="w-full bg-pink-200 py-2 rounded-md hover:bg-pink-100 transition border border-pink-300">
+                            <button type="submit" className="mt-5 w-full border border-amber-950 text-black py-2 rounded-md hover:bg-amber-950/30 transition">
                                 Iniciar</button>
                                 
                                 <button type="button" className="w-full border border-gray-300 px-4 py-2 bg-gray-200 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 transition">
