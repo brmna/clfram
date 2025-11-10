@@ -130,12 +130,12 @@ export default function Servicios() {
               {/* Información del producto */}
               <div className="p-5 sm:p-6 text-center flex flex-col justify-between flex-grow">
                 <div>
-                  <h2 className="text-lg sm:text-xl font-semibold mb-1">
+                  <a href={`/services/${item.id}`}className="text-lg sm:text-xl font-semibold mb-1">
                     {item.nombre}
-                  </h2>
+                  </a>
 
                   {/* Precio formateado en pesos colombianos */}
-                  <p className="text-gray-700 font-medium mb-3">
+                  <p className="text-green-700 font-semibold mb-3">
                     ${item.precio.toLocaleString("es-CO")}
                   </p>
 
@@ -152,14 +152,7 @@ export default function Servicios() {
 
                 {/* Botón de acción */}
                 <button
-                  className="
-                    mt-5 w-full 
-                    border border-amber-950 
-                    text-black 
-                    py-2 rounded-md 
-                    hover:bg-amber-950/30 
-                    transition
-                  "
+                  className="mt-5 w-full border border-amber-950 text-black py-2 rounded-md hover:bg-amber-950/30 transition"
                 >
                   Agregar al carrito
                 </button>

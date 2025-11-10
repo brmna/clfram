@@ -15,7 +15,7 @@ export default function Header() {
       />
 
       {/* Capa de opacidad */}
-      <div className="absolute inset-0 bg-black/15" />
+      <div className="absolute inset-0 bg-black/20" />
 
       {/* Navbar */}
       <nav className="fixed top-0 w-full bg-white/60 backdrop-blur-md shadow-sm z-50">
