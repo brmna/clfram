@@ -1,17 +1,9 @@
 "use client";
 import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getProducts } from "../data/products"; // Importamos la función para obtener productos
+import { useCart } from "../context/CartContext"; // Importamos el hook del carrito
 
-/* 
-  Lista de productos de ejemplo.
-  Cada producto contiene:
-  - id: identificador único
-  - nombre: nombre del producto
-  - precio: valor en pesos colombianos
-  - tallas: tallas disponibles
-  - estilos: variaciones de color o diseño
-  - categoria: tipo de prenda (Masculino, Femenino, Deportivo)
-  - imagen: URL de la imagen del producto
-*/
 const productos = [
   {
     id: 1,
@@ -19,9 +11,8 @@ const productos = [
     precio: 45000,
     tallas: ["S", "M", "L", "XL"],
     estilos: ["Negro", "Blanco", "Azul"],
-    categoria: "Masculino",
-    imagen:
-      "https://i.pinimg.com/736x/8f/25/72/8f2572b25e71778b84c48972c3f5395d.jpg",
+    categoria: ["Masculino", "Femenino"],
+    imagen: "/camisaoversize.png",
   },
   {
     id: 2,
@@ -29,9 +20,8 @@ const productos = [
     precio: 95000,
     tallas: ["28", "30", "32", "34", "36"],
     estilos: ["Azul Oscuro", "Negro"],
-    categoria: "Masculino",
-    imagen:
-      "https://i.pinimg.com/1200x/67/86/72/6786725926f64f3ce96bf2d0e5b65196.jpg",
+    categoria: ["Masculino", "Femenino"],
+    imagen: "/widelegazul.png",
   },
   {
     id: 3,
@@ -39,9 +29,8 @@ const productos = [
     precio: 120000,
     tallas: ["M", "L", "XL"],
     estilos: ["Rojo", "Gris", "Negro"],
-    categoria: "Deportivo",
-    imagen:
-      "https://i.pinimg.com/736x/57/9d/ed/579deddecfdd96e68debcb9ac51e242f.jpg",
+    categoria: ["Masculino", "Deportivo"],
+    imagen: "/chaquetagris.png",
   },
   {
     id: 4,
@@ -50,108 +39,113 @@ const productos = [
     tallas: ["S", "M", "L"],
     estilos: ["Rosa", "Negro", "Beige"],
     categoria: "Femenino",
-    imagen:
-      "https://i.pinimg.com/736x/6c/9a/89/6c9a89d0b870370aa604f8c77b43e868.jpg",
+    imagen: "/vestidoprima.png",
+  },
+  {
+    id: 5,
+    nombre: "Zapatillas Deportivas",
+    precio: 135000,
+    tallas: ["36", "38", "40"],
+    estilos: ["Blanco", "Negro", "Beige"],
+    categoria: ["Masculino", "Deportivo", "Femenino"],
+    imagen: "/zapatillas_frente.png",
   },
 ];
 
-/* 
-  Componente principal "Servicios"
-  Muestra los productos con un filtro por categoría.
-*/
 export default function Servicios() {
-  // Categorías disponibles en el menú
+  const { addToCart } = useCart(); // Obtenemos la función para agregar al carrito
+  const [productos, setProductos] = useState([]);
   const categorias = ["Todos", "Masculino", "Femenino", "Deportivo"];
-
-  // Estado para almacenar la categoría actualmente seleccionada
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todos");
 
-  // Filtrado dinámico de productos según la categoría elegida
+  // Usamos useEffect para cargar los productos cuando el componente se monta
+  useEffect(() => {
+    getProducts().then((data) => {
+      setProductos(data);
+    });
+  }, []); // El array vacío asegura que se ejecute solo una vez
+
+  // Filtro que SÍ funciona con strings y arrays
   const productosFiltrados =
     categoriaSeleccionada === "Todos"
       ? productos
+      : productos.filter((p) =>
+          Array.isArray(p.categoria)
+            ? p.categoria.includes(categoriaSeleccionada)
+            : p.categoria === categoriaSeleccionada
+        );
       : productos.filter((p) => p.categoria === categoriaSeleccionada);
 
+  // Mensaje de carga mientras se obtienen los productos
+  if (productos.length === 0) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <p className="text-xl">Cargando productos...</p>
+      </div>
+    );
+  }
+
   return (
-    <main className="min-h-screen flex flex-col bg-gray-50">
-      {/* ======= NAVBAR DE CATEGORÍAS ======= */}
-      <nav className="bg-white/70 backdrop-blur-sm py-4 shadow-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4">
-          <ul
-            className="
-              flex justify-center sm:justify-center
-              gap-6 sm:gap-10
-              text-gray-700 text-sm sm:text-base md:text-lg
-              font-medium
-              overflow-x-auto scrollbar-hide whitespace-nowrap
-            "
-          >
-            {categorias.map((cat) => (
-              <li
-                key={cat}
-                onClick={() => setCategoriaSeleccionada(cat)}
-                className={`cursor-pointer transition ${
-                  categoriaSeleccionada === cat
-                    ? "text-black border-b-2 border-black"
-                    : "hover:text-amber-950 text-gray-500"
-                }`}
-              >
-                {cat}
-              </li>
-            ))}
-          </ul>
+    <main className=" flex flex-col">
+      {/* ======= FILTROS ======= */}
+      <nav className="bg-white/80 backdrop-blur-sm py-4 shadow-sm sticky top-0 z-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          
+          {/* contenedor centrado */}
+          <div className="flex justify-center">
+            <ul className="flex gap-6 sm:gap-8 text-gray-700 text-sm sm:text-base font-medium overflow-x-auto scrollbar-hide whitespace-nowrap justify-center">
+              {categorias.map((cat) => (
+                <li
+                  key={cat}
+                  onClick={() => setCategoriaSeleccionada(cat)}
+                  className={`cursor-pointer transition px-2 pb-1 ${
+                    categoriaSeleccionada === cat
+                      ? "text-black border-b-2 border-black"
+                      : "hover:text-amber-950 text-gray-500"
+                  }`}
+                >
+                  {cat}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </nav>
 
-      {/* ======= SECCIÓN DE PRODUCTOS ======= */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+      {/* ======= PRODUCTOS ======= */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          
           {productosFiltrados.map((item) => (
             <div
               key={item.id}
-              className="
-                bg-white 
-                rounded-2xl 
-                shadow-sm 
-                hover:shadow-xl 
-                transition 
-                duration-300 
-                overflow-hidden 
-                flex flex-col
-              "
+              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden"
             >
-              {/* Imagen del producto */}
               <img
                 src={item.imagen}
                 alt={item.nombre}
-                className="w-full h-64 sm:h-72 object-cover"
+                className="w-full h-64 object-cover"
               />
 
-              {/* Información del producto */}
-              <div className="p-5 sm:p-6 text-center flex flex-col justify-between flex-grow">
-                <div>
-                  <a href={`/services/${item.id}`}className="text-lg sm:text-xl font-semibold mb-1">
-                    {item.nombre}
-                  </a>
+              <div className="p-5 text-center flex flex-col">
+                <a href={`/services/${item.id}`} className="text-lg font-semibold mb-1">
+                  {item.nombre}
+                </a>
 
-                  {/* Precio formateado en pesos colombianos */}
-                  <p className="text-green-700 font-semibold mb-3">
-                    ${item.precio.toLocaleString("es-CO")}
-                  </p>
+                <p className="text-green-700 font-semibold mb-3">
+                  ${item.precio.toLocaleString("es-CO")}
+                </p>
 
-                  {/* Tallas y estilos disponibles */}
-                  <p className="text-xs sm:text-sm text-gray-500">
-                    <span className="font-medium">Tallas:</span>{" "}
-                    {item.tallas.join(", ")}
-                  </p>
-                  <p className="text-xs sm:text-sm text-gray-500">
-                    <span className="font-medium">Estilos:</span>{" "}
-                    {item.estilos.join(", ")}
-                  </p>
-                </div>
+                <p className="text-sm text-gray-500">
+                  <strong>Tallas:</strong> {item.tallas.join(", ")}
+                </p>
+                <p className="text-sm text-gray-500">
+                  <strong>Estilos:</strong> {item.estilos.join(", ")}
+                </p>
 
-                {/* Botón de acción */}
+                <button className="mt-5 w-full border border-amber-950 text-black py-2 rounded-md hover:bg-amber-950/30 transition">
                 <button
+                  onClick={() => addToCart(item)}
                   className="mt-5 w-full border border-amber-950 text-black py-2 rounded-md hover:bg-amber-950/30 transition"
                 >
                   Agregar al carrito
@@ -159,6 +153,7 @@ export default function Servicios() {
               </div>
             </div>
           ))}
+
         </div>
       </section>
     </main>

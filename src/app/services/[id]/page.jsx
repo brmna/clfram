@@ -12,9 +12,10 @@ const productos = [
       "Nuestra camiseta oversize combina comodidad y estilo urbano. Fabricada con algodón de alta calidad, caída relajada y tacto suave.",
     disponibilidad: "En stock",
     imagenes: [
-      "https://i.pinimg.com/736x/8f/25/72/8f2572b25e71778b84c48972c3f5395d.jpg",
-      "https://i.pinimg.com/736x/8f/25/72/8f2572b25e71778b84c48972c3f5395d.jpg",
-      "https://i.pinimg.com/736x/8f/25/72/8f2572b25e71778b84c48972c3f5395d.jpg",
+      "/camisaoversize.png",
+      "/camisaoversize_atras.png",
+      "/camisaoversize_lado.png",
+      "/camisa.png"
     ],
   },
   {
@@ -28,9 +29,10 @@ const productos = [
       "Wide Leg Jeans con ajuste contemporáneo y cómodo. Perfecto para outfits casuales.",
     disponibilidad: "En stock",
     imagenes: [
-      "https://i.pinimg.com/1200x/67/86/72/6786725926f64f3ce96bf2d0e5b65196.jpg",
-      "https://i.pinimg.com/1200x/67/86/72/6786725926f64f3ce96bf2d0e5b65196.jpg",
-      "https://i.pinimg.com/1200x/67/86/72/6786725926f64f3ce96bf2d0e5b65196.jpg"
+      "/widelegazul.png",
+      "widelegazul_atras.png",
+      "widelegazul_lado.png",
+      "/wideleg.png"
     ],
   },
   {
@@ -44,9 +46,10 @@ const productos = [
       "Chaqueta ligera y transpirable ideal para entrenar o actividades al aire libre.",
     disponibilidad: "Pocas unidades",
     imagenes: [
-      "https://i.pinimg.com/736x/57/9d/ed/579deddecfdd96e68debcb9ac51e242f.jpg",
-      "https://i.pinimg.com/736x/57/9d/ed/579deddecfdd96e68debcb9ac51e242f.jpg",
-      "https://i.pinimg.com/736x/57/9d/ed/579deddecfdd96e68debcb9ac51e242f.jpg"
+      "/chaquetagris.png",
+      "/chaquetagris_atras.png",
+      "/chaquetagris_lado.png",
+      "/chaquetagris.png"
     ],
   },
   {
@@ -60,9 +63,26 @@ const productos = [
       "Vestido casual con tela fluida y corte favorecedor. Ideal para eventos de día.",
     disponibilidad: "En stock",
     imagenes: [
-      "https://i.pinimg.com/736x/6c/9a/89/6c9a89d0b870370aa604f8c77b43e868.jpg",
-      "https://i.pinimg.com/736x/6c/9a/89/6c9a89d0b870370aa604f8c77b43e868.jpg",
-      "https://i.pinimg.com/736x/6c/9a/89/6c9a89d0b870370aa604f8c77b43e868.jpg"
+      "/vestidoprima.png",
+      "/vestidoprima_atras.png",
+      "/vestidoprima_lado.png",
+      "/vestidoprima.png"
+    ],
+  },
+  {
+    id: 5,
+    nombre: "Zapatillas Deportivas",
+    precio: 180000,
+    tallas: ["36", "38", "40"],
+    estilos: ["Blanco", "Negro", "Beige"],
+    categoria: ["Masculino", "Deportivo", "Femenino"],
+    descripcion: "Zapatillas deportivas",
+    disponibilidad: "En stock",
+    imagenes: [
+      "/zapatillas_frente.png",
+      "/zapatillas_atras.png",
+      "/zapatillas_lado.png",
+      "/zapatillas.png"
     ],
   },
 ];
