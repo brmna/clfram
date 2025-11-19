@@ -1,20 +1,29 @@
-"use client";
+'use client'
 
-import { usePathname } from "next/navigation";
-import Header from "@/components/ui/Header";
-import Footer from "@/components/ui/Footer";
+import { usePathname } from 'next/navigation'
+
+// importa Header y Footer desde components/ui
+import Header from '@/components/ui/Header'
+import Footer from '@/components/ui/Footer'
 
 export default function LayoutClient({ children }) {
-  const pathName = usePathname() || "";
+  const pathName = usePathname()
 
-  const hiddePaths = ["/login", "/register", "/_not-found"];
-  const hide = hiddePaths.includes(pathName);
+  // rutas donde no queremos Header/Footer
+  const hiddePaths = ['/login', '/register']
+  const hidde = hiddePaths.includes(pathName)
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {!hide && <Header />}
-      <main className="flex-1">{children}</main>
-      {!hide && <Footer />}
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column'
+      }}
+    >
+      {!hidde && <Header />}
+      <main style={{ flex: 1 }}>{children}</main>
+      {!hidde && <Footer />}
     </div>
-  );
+  )
 }
