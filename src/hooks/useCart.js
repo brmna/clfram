@@ -1,9 +1,18 @@
-"use client";
-import { useContext } from "react";
-import { CartContext } from "@/app/context/cart";
+import { createContext, useContext, useReducer, useEffect } from "react";
+
+const CartContext = createContext();
+
+export function CartProvider({ children }) {
+  const [cart, dispatch] = useReducer(reducerFn, []);
+  const [cartOpen, setCartOpen] = useState(false);
+
+  return (
+    <CartContext.Provider value={{ cart, dispatch, cartOpen, setCartOpen }}>
+      {children}
+    </CartContext.Provider>
+  );
+}
 
 export function useCart() {
-  const context = useContext(CartContext);
-  if (!context) throw new Error("useCart debe usarse dentro de CartProvider");
-  return context; // retorna { cart, addToCart, ... }
+  return useContext(CartContext);
 }

@@ -1,71 +1,72 @@
 import pool from '@/lib/db';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import bcrypt from "bcryptjs";
+import { SignJWT, jwtVerify } from "jose";
 
-
-const SECRET_KEY_ACCESS_TOKEN = 'MY-KEY-ACCESS-T'
-const SECRET_KEY_REFRESH = 'MY-KEY-REFRESH-T'
-
+const SECRET_KEY_ACCESS_TOKEN = new TextEncoder().encode("MY-KEY-ACCESS-T");
+const SECRET_KEY_REFRESH = new TextEncoder().encode("MY-KEY-REFRESH-T");
 
 export async function POST(req) {
-    
-    try{
-        const { email, password } = await req.json();
+  try {
+    const { email, password } = await req.json();
 
-        const verifyUser = await pool.query(
-            "SELECT * FROM users WHERE email = $1", [email]
-        )
+    const verifyUser = await pool.query(
+      "SELECT * FROM users WHERE email = $1",
+      [email]
+    );
 
-        if( verifyUser.rows.length  > 0){
-            const users = verifyUser.rows[0];
-
-            const isPasswordValidate = await bcrypt.compare(password, users.password)
-
-            if(isPasswordValidate){
-                const { accessToken, refreshToken } = generateToken(users)
-
-                return Response.json({
-                    "menssage": "Login exitoso",
-                    accessToken,
-                    refreshToken
-                })
-
-            }
-
-            return Response.json({message: "Las credenciales son incorrectas"})
-
-        }
-
-        return Response.json({message: "El email no existe"})
-
-    } catch (error) {
-        console.log(error)
-        return new Response('Error interno del servidor', { status: 500 })
+    if (verifyUser.rows.length === 0) {
+      return Response.json({ message: "El email no existe" }, { status: 400 });
     }
+
+    const user = verifyUser.rows[0];
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return Response.json(
+        { message: "Las credenciales son incorrectas" },
+        { status: 400 }
+      );
+    }
+
+    const accessToken = await generateAccessToken(user);
+    const refreshToken = await generateRefreshToken(user);
+
+    return Response.json({
+      message: "Login exitoso",
+      accessToken,
+      refreshToken,
+    });
+
+  } catch (error) {
+    console.error(error);
+    return new Response("Error interno del servidor", { status: 500 });
+  }
 }
 
-
-export function generateToken(user) {
-    const accessToken = jwt.sign(
-        // informacion del usuario
-        {"id": user.id, "name": user.name, "email": user.email},
-        // llave secreta
-        SECRET_KEY_ACCESS_TOKEN,
-        // configuraciones
-        {expiresIn: '30M'}
-    )
-
-        const refreshToken = jwt.sign(
-        // informacion del usuario
-        {"id": user.id, "name": user.name, "email": user.email},
-        // llave secreta
-        SECRET_KEY_REFRESH,
-        // configuraciones
-        {expiresIn: '1h'}
-    )
-
-    return { accessToken, refreshToken }
+async function generateAccessToken(user) {
+  return await new SignJWT({
+    id: user.id,
+    name: user.name,
+    email: user.email,
+  })
+    .setProtectedHeader({ alg: "HS256" })
+    .setExpirationTime("30m")
+    .sign(SECRET_KEY_ACCESS_TOKEN);
 }
-export function verifyToken(token){
-    return jwt.verify(token, SECRET_KEY_ACCESS_TOKEN)
+
+async function generateRefreshToken(user) {
+  return await new SignJWT({
+    id: user.id,
+    name: user.name,
+    email: user.email,
+  })
+    .setProtectedHeader({ alg: "HS256" })
+    .setExpirationTime("1h")
+    .sign(SECRET_KEY_REFRESH);
+}
+
+export async function verifyToken(token) {
+  const { payload } = await jwtVerify(token, SECRET_KEY_ACCESS_TOKEN);
+  return payload;
 }
